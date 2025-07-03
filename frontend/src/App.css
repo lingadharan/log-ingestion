@@ -1,0 +1,336 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.App {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  color: #0056b3;
+}
+
+h2 {
+  color: #0056b3;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.log-ingestion, .filter-bar, .log-results {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-sizing: border-box; /* Include padding in the element's total width */
+}
+
+.log-ingestion form, .filter-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .App {
+    padding: 15px;
+  }
+
+  .log-ingestion form, .filter-inputs {
+    grid-template-columns: 1fr; /* Stack items on smaller screens */
+  }
+
+  .log-ingestion input,
+  .log-ingestion textarea,
+  .filter-bar input,
+  .filter-bar select {
+    font-size: 0.9em;
+  }
+
+  .log-table th,
+  .log-table td {
+    font-size: 0.8em;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  .log-ingestion button {
+    font-size: 0.8em;
+    padding: 6px 10px;
+  }
+
+  .log-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap; /* Prevent text wrapping in table cells */
+  }
+
+  .log-table thead,
+  .log-table tbody,
+  .log-table th,
+  .log-table td,
+  .log-table tr {
+    display: block;
+  }
+
+  .log-table th,
+  .log-table td {
+    width: auto; /* Allow cells to take natural width */
+    white-space: normal; /* Allow text wrapping within cells */
+  }
+}
+
+@media (max-width: 360px) {
+  .App {
+    padding: 5px;
+  }
+
+  .log-ingestion input,
+  .log-ingestion textarea,
+  .filter-bar input,
+  .filter-bar select {
+    font-size: 0.8em;
+    padding: 8px;
+  }
+
+  h1 {
+    font-size: 1.3em;
+  }
+
+  h2 {
+    font-size: 1em;
+  }
+
+  .log-ingestion button {
+    font-size: 0.7em;
+    padding: 5px 8px;
+  }
+
+  .log-table th,
+  .log-table td {
+    font-size: 0.7em;
+    padding: 4px;
+  }
+}
+
+.log-ingestion input,
+.log-ingestion textarea,
+.filter-bar input,
+.filter-bar select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  height: 40px; /* Fixed height for consistency */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.log-ingestion textarea {
+  height: 80px; /* Adjust height for textarea to allow more input */
+}
+
+.log-ingestion form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  position: relative; /* Needed for absolute positioning of the button */
+  padding-bottom: 50px; /* Add space for the absolutely positioned button */
+}
+
+.log-ingestion button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 8px 15px; /* Reduced padding */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em; /* Slightly smaller font */
+  width: fit-content; /* Make button fit its content */
+  margin: 0; /* Remove auto margins */
+}
+
+.filter-bar {
+  width: 100%; /* Ensure full width */
+  position: relative; /* Needed for absolute positioning of the button */
+  padding-bottom: 50px; /* Add space for the absolutely positioned button */
+}
+
+.log-ingestion, .filter-bar {
+  width: 100%; /* Ensure full width */
+}
+
+.filter-button-container button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 8px 15px; /* Reduced padding */
+  background-color: #007bff !important; /* Explicitly set blue background with !important */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em; /* Slightly smaller font */
+  width: fit-content; /* Make button fit its content */
+  margin: 0; /* Remove auto margins */
+}
+
+.log-ingestion button:hover,
+.filter-button-container button:hover {
+  background-color: #0056b3;
+}
+
+.log-list {
+  display: grid;
+  gap: 15px;
+}
+
+.log-item {
+  padding: 15px;
+  border-left: 5px solid #007bff;
+  background-color: #e9f7ff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.log-item p {
+  margin: 5px 0;
+  word-wrap: break-word;
+}
+
+.log-error {
+  border-left-color: #dc3545;
+  background-color: #f8d7da;
+}
+
+.log-warn {
+  border-left-color: #ffc107;
+  background-color: #fff3cd;
+}
+
+.log-info {
+  border-left-color: #17a2b8;
+  background-color: #d1ecf1;
+}
+
+.log-debug {
+  border-left-color: #6c757d;
+  background-color: #e2e3e5;
+}
+
+.log-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.log-table th,
+.log-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.log-table th {
+  background-color: #f2f2f2;
+}
+
+.log-item.log-error {
+  background-color: #ffdddd;
+  border-left: 5px solid #f44336;
+}
+
+.log-item.log-warn {
+  background-color: #fff1c6;
+  border-left: 5px solid #ffeb3b;
+}
+
+.log-item.log-info {
+  background-color: #e7f3fe;
+  border-left: 5px solid #2196f3;
+}
+
+.log-item.log-debug {
+  background-color: #f5f5f5;
+  border-left: 5px solid #9e9e9e;
+}
+
+/* Status Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  width: 80%;
+  max-width: 400px;
+}
+
+.popup-success {
+  border: 2px solid #28a745;
+}
+
+.popup-error {
+  border: 2px solid #dc3545;
+}
+
+.popup-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 1.2em; /* Reduced font size */
+  cursor: pointer;
+  color: #333;
+  padding: 5px; /* Add padding to make it easier to click */
+}
+
+.popup-message {
+  margin: 20px 0;
+  font-size: 1.1em;
+  color: #333;
+}
