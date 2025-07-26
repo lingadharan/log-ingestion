@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "level": "warn",
+    "message": "this is warning message",
+    "resourceId": "Resid1",
+    "timestamp": "2025-07-03T17:43:20.525Z",
+    "traceId": "traseid1",
+    "spanId": "sapneid1",
+    "commit": "Commit",
+    "metadata": {}
+  },
+  {
+    "level": "info",
+    "message": "this is me",
+    "resourceId": "asd",
+    "timestamp": "2025-07-03T17:44:27.850Z",
+    "traceId": "dasda",
+    "spanId": "asdasd",
+    "commit": "asdasdas",
+    "metadata": {}
+  }
+]
